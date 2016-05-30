@@ -66,7 +66,7 @@ int main ( int argc, char **argv )
 
     int cost = 0;
     while (!t1.empty() || !t2.empty() || !t3.empty()) {
-        print(t1, "\n\nt1");
+        print(t1, "\nt1");
         print(t2, "t2");
         print(t3, "t3");
 
@@ -103,10 +103,11 @@ int main ( int argc, char **argv )
 int on3Triple(std::queue<Texture> &qx1, std::queue<Texture> &qx2, std::queue<Texture> &qx3)
 {
     int m3 = MIN(qx1.front().num, qx2.front().num, qx3.front().num);
-    if (qx1.front().num == m3) { qx1.front().ripOff(m3); clean(qx1); return m3; }
-    if (qx2.front().num == m3) { qx2.front().ripOff(m3); clean(qx2); return m3; }
-    if (qx3.front().num == m3) { qx3.front().ripOff(m3); clean(qx3); return m3; }
+    if      (qx1.front().num == m3) { qx1.front().ripOff(m3); clean(qx1); }
+    else if (qx2.front().num == m3) { qx2.front().ripOff(m3); clean(qx2); }
+    else                            { qx3.front().ripOff(m3); clean(qx3); }
     std::cout << "\t\t\t\t1/3: " << m3 << std::endl;
+    return m3;
 }
 int on3Double(std::queue<Texture> &qx1, std::queue<Texture> &qx2, std::queue<Texture> &qy)
 {
