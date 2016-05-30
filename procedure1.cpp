@@ -31,9 +31,7 @@ struct Texture {
 #define MIN(a,b,c) min(min(a,b),min(b,c))
 
 inline void clean(std::queue<Texture> &q) {
-    if(!q.empty()&&q.front().num == 0) {
-        q.pop();
-    }
+    if(!q.empty()&&q.front().num == 0) { q.pop(); }
 }
 
 void print( const std::queue<Texture> &q0,
@@ -93,9 +91,10 @@ int main ( int argc, char **argv )
         DOUBLE_SINGLE(t1,t2,t3)
         DOUBLE_SINGLE(t2,t1,t3)
         DOUBLE_SINGLE(t3,t1,t2)
-#undef DOUBLE_SINGLE
+#undef  DOUBLE_SINGLE
     }
     std::cout << "\n** Used " << cost << " minutes. **\n";
+    getchar(); // for those never used command-line interface
 
     return 0;
 }
@@ -109,6 +108,7 @@ int on3Triple(std::queue<Texture> &qx1, std::queue<Texture> &qx2, std::queue<Tex
     std::cout << "\t\t\t\t1/3: " << m3 << std::endl;
     return m3;
 }
+
 int on3Double(std::queue<Texture> &qx1, std::queue<Texture> &qx2, std::queue<Texture> &qy)
 {
     int m3 = MIN(qx1.front().num, qx2.front().num, qy.front().num);
@@ -121,6 +121,7 @@ int on3Double(std::queue<Texture> &qx1, std::queue<Texture> &qx2, std::queue<Tex
     std::cout << "\t\t\t\t2/3: " << m3 << std::endl;
     return m3;
 }
+
 int on3Single(std::queue<Texture> &qx, std::queue<Texture> &qy, std::queue<Texture> &qz)
 {
     int m3 = MIN(qx.front().num, qy.front().num, qz.front().num);
@@ -130,6 +131,7 @@ int on3Single(std::queue<Texture> &qx, std::queue<Texture> &qy, std::queue<Textu
     std::cout << "\t\t\t\t3/3: " << m3 << std::endl;
     return m3;
 }
+
 int on2Double(std::queue<Texture> &qx1, std::queue<Texture> &qx2)
 {
     int m2 = min(qx1.front().num, qx2.front().num);
@@ -137,6 +139,7 @@ int on2Double(std::queue<Texture> &qx1, std::queue<Texture> &qx2)
     if (qx2.front().num == m2) { qx2.front().ripOff(m2); clean(qx2); return m2; }
     std::cout << "\t\t\t\t1/2: " << m2 << std::endl;
 }
+
 int on2Single(std::queue<Texture> &qx, std::queue<Texture> &qy)
 {
     int m2 = min(qx.front().num, qy.front().num);
@@ -145,6 +148,7 @@ int on2Single(std::queue<Texture> &qx, std::queue<Texture> &qy)
     std::cout << "\t\t\t\t2/2: " << m2 << std::endl;
     return m2;
 }
+
 int on1(std::queue<Texture> &q)
 {
     int cnt = 0;

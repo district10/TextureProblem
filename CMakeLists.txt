@@ -1,4 +1,4 @@
 project( TextureProblem )
 cmake_minimum_required( VERSION 2.6 )
-file( GLOB SRCS *.c *.cpp *.cc *.h *.hpp )
-add_executable( ${PROJECT_NAME} ${SRCS} )
+add_executable( Procedure1 Procedure1.cpp )
+add_executable( Procedure2 Procedure2.cpp )
