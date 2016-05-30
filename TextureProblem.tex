@@ -2,15 +2,15 @@
 %!TEX program  = xelatex
 
 \documentclass[bwprint]{cumcmthesis}    % \documentclass{cumcmthesis}
-\graphicspath{{images/}}                % 图片文件路径
+\graphicspath{{images/}{diagrams/}}                % 图片文件路径
 
 \title{任务车间调度问题解析}
 \tihao{A}
 \baominghao{4321}
 \schoolname{武汉大学}
-\membera{TANG ZhiXiong}
-\memberb{TU JinGe}
-\memberc{ZHANG Ying}
+\membera{MMTZX} % name will be replaced with “2015...1234 张三”（学号姓名）in makefile
+\memberb{MMTJG}
+\memberc{MMZY}
 \supervisor{Prof. YAO}
 \yearinput{2016}
 \monthinput{05}
@@ -109,16 +109,15 @@ m2 处的图案 2 已经完成了 m1 的印刷任务（即已经花了十分钟�
 \section{源程序}
 
 \begin{lstlisting}{language=cpp}
-int on3Single(std::queue<Texture> &qx, std::queue<Texture> &qy, std::queue<Texture> &qz)
-{
-    int m3 = MIN(qx.front().num, qy.front().num, qz.front().num);
-    qx.front().ripOff(m3); clean(qx);
-    qy.front().ripOff(m3); clean(qy);
-    qz.front().ripOff(m3); clean(qz);
-    std::cout << "\t\t\t\t3/3: " << m3 << std::endl;
-    return m3;
-}
-
+printf
 \end{lstlisting}
+
+
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{markov1.pdf}
+\caption{站点的空间临近查询}
+\label{sitetarget}
+\end{figure}
 
 \end{document}

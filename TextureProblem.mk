@@ -1,9 +1,21 @@
-DATASRC:=$(wildcard ../images/*)
-DATADST:= $(DATASRC:../%=%)
+ifeq (,$(MMTZX))
+	MMTZX:=TANG ZhiXiong
+endif
+ifeq (,$(MMTJG))
+	MMTJG:=TU JinGe
+endif
+ifeq (,$(MMZY))
+	MMZY:=ZHANG Ying
+endif
+
+IMGSRC:=$(wildcard ../images/*)
+IMGDST:= $(IMGSRC:../%=%)
 CODESRC:=$(wildcard ../*.cpp)
 CODEDST:= $(CODESRC:../%=code/%)
+DIAGRAMSRC:=$(wildcard ../diagrams/*.tex)
+DIAGRAMDST:=$(DIAGRAMSRC:../diagrams/%.tex=%.pdf)
 
-all: $(DATADST) $(CODEDST) TextureProblem.pdf ../TextureProblem.pdf
+all: $(IMGDST) $(CODEDST) $(DIAGRAMDST) TextureProblem.pdf ../TextureProblem.pdf
 
 images/%: ../images/%
 	@mkdir -p $(@D)
@@ -11,11 +23,17 @@ images/%: ../images/%
 code/%.cpp: ../%.cpp
 	@mkdir -p $(@D)
 	cp $< $@
+%.pdf: ../diagrams/%.tex
+	xelatex $<
 
-TextureProblem.pdf: TextureProblem.tex cumcmthesis.cls
+TextureProblem.pdf: TextureProblem.tex cumcmthesis.cls $(DIAGRAMDST)
 	xelatex $<
 TextureProblem.tex: ../TextureProblem.tex
-	cp $< $@
+	cat $< \
+		| sed -e "s/MMTZX/$(MMTZX)/" \
+		| sed -e "s/MMTJG/$(MMTJG)/" \
+		| sed -e "s/MMZY/$(MMZY)/" \
+		> $@
 cumcmthesis.cls: ../cumcmthesis.cls
 	cp $< $@
 
