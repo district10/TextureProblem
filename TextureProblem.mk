@@ -12,8 +12,9 @@ IMGSRC:=$(wildcard ../images/*)
 IMGDST:= $(IMGSRC:../%=%)
 CODESRC:=$(wildcard ../*.cpp)
 CODEDST:= $(CODESRC:../%=code/%)
-DIAGRAMSRC:=$(wildcard ../diagrams/*.tex)
-DIAGRAMDST:=$(DIAGRAMSRC:../diagrams/%.tex=%.pdf)
+DIAGRAMSRC:=$(wildcard ../diagrams/*.tex ../diagrams/examples/*.tex)
+DIAGRAMDST:=$(DIAGRAMSRC:../diagrams/examples/%.tex=%.pdf)
+DIAGRAMDST:=$(DIAGRAMDST:../diagrams/%.tex=%.pdf)
 
 all: $(IMGDST) $(CODEDST) $(DIAGRAMDST) TextureProblem.pdf ../TextureProblem.pdf
 
@@ -25,8 +26,10 @@ code/%.cpp: ../%.cpp
 	cp $< $@
 %.pdf: ../diagrams/%.tex
 	xelatex $<
+%.pdf: ../diagrams/examples/%.tex
+	xelatex $<
 
-TextureProblem.pdf: TextureProblem.tex cumcmthesis.cls $(DIAGRAMDST)
+TextureProblem.pdf: TextureProblem.tex cumcmthesis.cls
 	xelatex $<
 TextureProblem.tex: ../TextureProblem.tex
 	cat $< \

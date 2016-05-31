@@ -6,3 +6,6 @@ all:
 clean:
 	rm -rf tmp/*
 	rm TextureProblem.pdf
+
+rmpdf:
+	rm TextureProblem.pdf tmp/TextureProblem.pdf

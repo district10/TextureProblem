@@ -1,0 +1,45 @@
+MODEL:
+
+    SETS:
+        PAPER: ii;
+        MACHINE: pp;
+        Cip( PAPER, MACHINE ):
+            Sip,
+            Tip;
+        Cipq( PAPER, MACHINE, MACHINE ):
+            Ripq;
+        Cpij( MACHINE, PAPER, PAPER ):
+            Ipij;
+    ENDSETS
+
+    DATA:
+        ii = 1,2,3;
+        pp = 1,2,3;
+        Tip =   0, 45, 10,
+                10, 20, 34,
+                17, 12, 28;
+        Ripq =  0, 0, 0,
+                0, 0, 1,
+                0, 0, 0,
+
+                0, 1, 1,
+                0, 0, 1,
+                0, 0, 0,
+
+                0, 0, 0,
+                1, 0, 0,
+                1, 1, 0;
+    ENDDATA
+
+    @for( Cip(i,p):
+        Sip(i,p) >= 0 );
+    @for( Cpij(p,i,j):
+        (Sip(i,p)+Tip(i,p)-Sip(j,p))*Ipij(p,i,j) < 0 );
+    @for( Cipq(i,p,q):
+        (Sip(i,p)+Tip(i,p)-Sip(i,q)*Ripq(i,p,q)) < 0 );
+    @for( Cip(i,p):
+        @abs(Sip(i,p)) = 1 );
+
+    MIN = @min(Cpij(p,i,j): @max( Cip(i,p): Sip(i,p) + Tip(i,p) ));
+
+END
