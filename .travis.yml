@@ -12,6 +12,7 @@ install:
   - mkdir -p $HOME/texlive && curl -L $TLPATH | tar -JxC $HOME/texlive
   - xelatex --version
   - tlmgr --version
+  - tlmgr update --self
   - tlmgr install CJK CJKfntef CJKpunct ctex etoolbox fancyhdr fontspec indentfirst l3kernel l3packages oberdiek savesym tools ulem xeCJK zhmetrics
 
 script:
