@@ -9,11 +9,12 @@ install:
   - wget https://github.com/whudoc/statics/raw/master/qrsync.tar.gz
   - tar xfz qrsync.tar.gz
   - chmod +x qrsync
-  - mkdir -p $HOME/texlive && curl -L $TLPATH | tar -JxC $HOME/texlive
+  - #mkdir -p $HOME/texlive && curl -L $TLPATH | tar -JxC $HOME/texlive
+  - sudo apt-get install -y texlive-full
   - xelatex --version
-  - tlmgr --version
-  - tlmgr update --self
-  - tlmgr install CJK CJKfntef CJKpunct ctex etoolbox fancyhdr fontspec indentfirst l3kernel l3packages oberdiek savesym tools ulem xeCJK zhmetrics
+  - #tlmgr --version
+  - #tlmgr update --self
+  - #tlmgr install CJK CJKfntef CJKpunct ctex etoolbox fancyhdr fontspec indentfirst l3kernel l3packages oberdiek savesym tools ulem xeCJK zhmetrics
 
 script:
   - cd ~/build/district10/TextureProblem
