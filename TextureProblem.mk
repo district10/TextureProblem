@@ -36,6 +36,7 @@ TextureProblem.tex: ../TextureProblem.tex
 		| sed -e "s/MMTZX/$(MMTZX)/" \
 		| sed -e "s/MMTJG/$(MMTJG)/" \
 		| sed -e "s/MMZY/$(MMZY)/" \
+		| sed -e "s/BUILDDATE/$(BUILDDATE)/" \
 		> $@
 cumcmthesis.cls: ../cumcmthesis.cls
 	cp $< $@

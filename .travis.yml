@@ -1,0 +1,19 @@
+language: c
+sudo: required
+before_install:
+  - mkdir -p $HOME/texlive && curl -L http://whudoc.qiniudn.com/texlive/packed-texlive.tar.xz | tar -JxC $HOME/texlive
+  - export PATH="/tmp/bin:/tmp/texlive/bin/x86_64-linux:$HOME/bin:$HOME/texlive/bin/x86_64-linux:$PATH"
+  - xelatex --version
+  - tlmgr --version
+install:
+  - mkdir -p /tmp/bin && cd /tmp/bin
+  - wget https://github.com/whudoc/statics/raw/master/qrsync.tar.gz
+  - tar xfz qrsync.tar.gz
+  - chmod +x qrsync
+script:
+  - cd ~/build/district10/TextureProblem
+  - BUILDDATE=`date` make
+  - rm -rf publish/*
+  - cp TextureProblem.pdf publish/TextureProblem-`date +%Y-%m-%d`.pdf
+  - cat conf.json.in | sed -e "s/QiNiuAK/$QiNiuAK/" | sed -e "s/QiNiuSK/$QiNiuSK/" > conf.json
+  - make qiniu

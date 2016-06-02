@@ -3,6 +3,9 @@ all:
 	cp TextureProblem.mk tmp/Makefile
 	make -C tmp
 
+qiniu:
+	qrsync conf.json
+
 clean:
 	rm -rf tmp/*
 	rm TextureProblem.pdf
