@@ -1,15 +1,19 @@
 language: c
 sudo: required
 before_install:
-  - mkdir -p $HOME/texlive && curl -L http://whudoc.qiniudn.com/texlive/packed-texlive.tar.xz | tar -JxC $HOME/texlive
   - export PATH="/tmp/bin:/tmp/texlive/bin/x86_64-linux:$HOME/bin:$HOME/texlive/bin/x86_64-linux:$PATH"
-  - xelatex --version
-  - tlmgr --version
+  - export TLPATH="http://whudoc.qiniudn.com/texlive/packed-texlive.tar.xz"
+  - export TLPATH="https://github.com/urdh/texlive-blob/releases/download/20150712/texlive.tar.xz"
 install:
   - mkdir -p /tmp/bin && cd /tmp/bin
   - wget https://github.com/whudoc/statics/raw/master/qrsync.tar.gz
   - tar xfz qrsync.tar.gz
   - chmod +x qrsync
+  - mkdir -p $HOME/texlive && curl -L $TLPATH | tar -JxC $HOME/texlive
+  - xelatex --version
+  - tlmgr --version
+  - tlmgr install CJK CJKfntef CJKpunct ctex etoolbox fancyhdr fontspec indentfirst l3kernel l3packages oberdiek savesym tools ulem xeCJK zhmetrics
+
 script:
   - cd ~/build/district10/TextureProblem
   - BUILDDATE=`date` make
