@@ -8,7 +8,7 @@ qiniu:
 
 clean:
 	rm -rf tmp/*
-	rm TextureProblem.pdf
+	rm TextureProblem.pdf 2>/dev/null
 
 rmpdf:
 	rm TextureProblem.pdf tmp/TextureProblem.pdf
